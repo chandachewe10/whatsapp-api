@@ -1,11 +1,11 @@
 {
-    "name": "admin/whatsapp",
+    "name": "chandachewe/whatsapp",
     "description": "A PHP Package for Business Whatsapp API",
     "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Admin\\Whatsapp\\": "src/"
+            "Chandachewe\\Whatsapp\\": "src/"
         }
     },
     "authors": [
@@ -14,5 +14,16 @@
             "email": "chewec03@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.34"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }
