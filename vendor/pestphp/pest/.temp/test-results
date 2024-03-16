@@ -1,1 +1,0 @@
-{"version":"pest_2.34.4","defects":[],"times":{"P\\Tests\\Feature\\ExampleTest::__pest_evaluable_example":0.01,"P\\Tests\\Unit\\ExampleTest::__pest_evaluable_example":0,"P\\Tests\\Unit\\DotEnvTest::__pest_evaluable_it_asserts_DotEnv_is_working_Fine":0.001,"P\\Tests\\Unit\\TemplateTest::__pest_evaluable_it_asserts_Template_Messaging_is_working_Fine":0.851}}

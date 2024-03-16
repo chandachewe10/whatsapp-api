@@ -55,7 +55,7 @@ class TemplateMessage
             return $responseBody;
 
         } catch (\Exception $e) {
-            return $_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages';
+            return $e->getMessage();
         }
     }
 }
