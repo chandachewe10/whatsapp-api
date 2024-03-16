@@ -13,21 +13,19 @@ class TemplateMessage
     private $recipientNumber;
     private $token;
 
-    public function __construct(int $version, float $businessPhoneNumberId, float $recipientNumber, string $token)
-    {
-        $this->version = $version;
-        $this->businessPhoneNumberId = $businessPhoneNumberId;
-        $this->recipientNumber = $recipientNumber;
-        $this->token = $token;
-    }
+    public function __construct(string $version, $businessPhoneNumberId, $recipientNumber, string $token)
+{
+    $this->version = $version;
+    $this->businessPhoneNumberId = sprintf("%.0f", $businessPhoneNumberId);
+    $this->recipientNumber = sprintf("%.0f", $recipientNumber); 
+    $this->token = $token;
+}
+
 
     public function template(string $templateName, string $languageCode = null)
     {
         try {
-            $client = new Client([
-                'base_uri' => $_ENV['BASE_URI'],
-                'timeout' => 120.0,
-            ]);
+          
 
             $data = [
                 'messaging_product' => 'whatsapp',
@@ -41,9 +39,9 @@ class TemplateMessage
                 ]
             ];
 
-
+            $client = new Client();
             $jsonData = json_encode($data);
-            $response = $client->post($_ENV['BASE_URI'], [
+            $response = $client->post($_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->token,
                     'Content-Type' => 'application/json',
@@ -53,11 +51,11 @@ class TemplateMessage
             ]);
 
 
-            $responseBody = $response->getBody()->getContents();
+            $responseBody = $response->getBody();
             return $responseBody;
 
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return $_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages';
         }
     }
 }
