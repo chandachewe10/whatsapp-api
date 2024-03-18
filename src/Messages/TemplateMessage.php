@@ -14,34 +14,125 @@ class TemplateMessage
     private $token;
 
     public function __construct(string $version, $businessPhoneNumberId, $recipientNumber, string $token)
-{
-    $this->version = $version;
-    $this->businessPhoneNumberId = sprintf("%.0f", $businessPhoneNumberId);
-    $this->recipientNumber = sprintf("%.0f", $recipientNumber); 
-    $this->token = $token;
-}
+    {
+        $this->version = $version;
+        $this->businessPhoneNumberId = sprintf("%.0f", $businessPhoneNumberId);
+        $this->recipientNumber = sprintf("%.0f", $recipientNumber);
+        $this->token = $token;
+    }
 
 
-    public function template(string $templateName, string $languageCode = null)
+    public function template(string $templateName, string $languageCode = null, $header = null, string $type, string $link = null)
     {
         try {
-          
 
-            $data = [
-                'messaging_product' => 'whatsapp',
-                'to' => $this->recipientNumber,
-                'type' => 'template',
-                'template' => [
-                    'name' => $templateName,
-                    'language' => [
-                        'code' => $languageCode ?? 'en_US'
+            if (strtolower($type === 'image')) {
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'to' => $this->recipientNumber,
+                    'type' => 'template',
+                    'template' => [
+                        'name' => $templateName,
+                        'language' => [
+                            'code' => $languageCode ?? 'en_US'
+                        ],
+                        "components" => [
+                            [
+                                "type" => "header",
+                                "parameters" => [
+                                    [
+                                        "type" => "image",
+                                        'image' => [
+                                            'link' => $link
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
                     ]
-                ]
-            ];
+                ];
+            } elseif (strtolower($type === 'document')) {
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'to' => $this->recipientNumber,
+                    'type' => 'template',
+                    'template' => [
+                            'name' => $templateName,
+                            'language' => [
+                                'code' => $languageCode ?? 'en_US'
+                            ],
+                            "components" => [
+                                [
+                                    "type" => "header",
+                                    "parameters" => [
+                                        [
+                                            "type" => "document",
+                                            'document' => [
+                                                'link' => $link
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                ];
+            } elseif (strtolower($type === 'video')) {
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'to' => $this->recipientNumber,
+                    'type' => 'template',
+                    'template' => [
+                        'name' => $templateName,
+                        'language' => [
+                            'code' => $languageCode ?? 'en_US'
+                        ],
+                        "components" => [
+                            [
+                                "type" => "header",
+                                "parameters" => [
+                                    [
+                                        "type" => "video",
+                                        'video' => [
+                                            'link' => $link
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ];
+            } else {
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'to' => $this->recipientNumber,
+                    'type' => 'template',
+                    'template' => [
+                        'name' => $templateName,
+                        'language' => [
+                            'code' => $languageCode ?? 'en_US'
+                        ],
+                        "components" => [
+                            [
+                                "type" => "header",
+                                "parameters" => [
+                                    [
+                                        "type" => "text",
+                                        'text' => $header
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ];
+            }
+
+
+
+
 
             $client = new Client();
             $jsonData = json_encode($data);
-            $response = $client->post($_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages', [
+            $response = $client->post($_ENV['BASE_URI'] . '/' . $this->version . '/' . $this->businessPhoneNumberId . '/messages', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->token,
                     'Content-Type' => 'application/json',
