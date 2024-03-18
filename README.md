@@ -41,5 +41,5 @@ $response = $templateMessage->template(
 echo $response;
 
 
-**Your version should be rounded to one decimal place e.g v19.0 and not v19**
-**The language code is optional here. If empty it will take the default as en_US**
+> Your version should be rounded to one decimal place e.g v19.0 and not v19
+> The language code is optional here. If empty it will take the default as en_US
