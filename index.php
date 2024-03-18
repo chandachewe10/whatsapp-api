@@ -1,27 +1,37 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use Chandachewe\Whatsapp\Messages\ListMessage;
+use Chandachewe\Whatsapp\Messages\ButtonMessage;
 
-$templateMessage = new ListMessage( 'v19.0',
+$templateMessage = new ButtonMessage( 'v19.0',
 '103211462576623',
 '260769891754',
-'EAALG7oWrKU4BO37Sbq125BME9EZA6sp6LgblGaKjCjaQF8yQM2QZCFZAJL6CJ0lsfj16Gqm02Fyafo8uZChV5iT1rcAOvpNdRgOnm8PJ7GWEyVZCQolkc4UP0AZBgWbxN6vzO2E2F6FrEfpdERt8yT94pFd1qJowLvg4tixNiSoQXnZCTj9XIwidO6ZCnMCewwe1IPk7rbcmUE7ZBKdbTRH4S');
+'EAALG7oWrKU4BO8sT6zUXLt3tYI3GKvqBjpX2hQDCVQCBk4ZBiTc8KJT7LKVdYYPZBLFkyuhD6fWkHw8uYEHtfyuAYxjudXbCQoYKeIJVdF0n5d3qarQ2M9Qa8vqZAVkX2erFI4JrErmYIGXZBQarO1H6LWvLnTG4uBFPVqaJ1bdg9bZAR2W0UhG2CGYoJ6ZAIhMSUkkTNZBcPaOBZA2VbSMZD');
 
-$response = $templateMessage->list(   
+$response = $templateMessage->button(   
     'List of Cities',
     'Please select the city where you are coming from','',
     [
-        'button' => 'Provinces',
-        'sections' => [
+        'buttons' => [
             [
-                'title' => 'Select Province',
-                'rows' => [
-                    [
-                        'id' => '100993900202',
-                        'title' => 'Lusaka',
-                        'description' => 'Lusaka Province'
-                    ]
+                'type' => 'reply',
+                'reply' => [
+                    'id' => 'unique-postback-id',
+                    'title' => 'Mtn'
+                ]
+            ],
+            [
+                'type' => 'reply',
+                'reply' => [
+                    'id' => 'unique-postback2-id',
+                    'title' => 'Airtel'
+                ]
+            ],
+            [
+                'type' => 'reply',
+                'reply' => [
+                    'id' => 'unique-postback3-id',
+                    'title' => 'Zamtel'
                 ]
             ]
         ]
