@@ -28,10 +28,12 @@ You need to create a template message from the whatsapp business API [Developer 
 require 'vendor/autoload.php';  
 use Chandachewe\Whatsapp\Messages\TemplateMessage;
 
-$templateMessage = new TemplateMessage( 'v19.0',
+$templateMessage = new TemplateMessage(
+'v19.0',
 'BUSINESS PHONE NUMBER ID',
 'RECIPIENT PHONE NUMBER',
-'TOKEN');
+'TOKEN'
+);
 
 $response = $templateMessage->template(   
     'template_name',
