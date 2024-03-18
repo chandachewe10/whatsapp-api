@@ -22,35 +22,114 @@ class ButtonMessage
     }
 
 
-    public function button(string $header, string $body, string $footer = null,$sections)
+    public function button(string $header, string $body, string $footer = null, $sections, string $type, string $link = null)
     {
         try {
 
+            if (strtolower($type === 'image')) {
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'recipient_type' => 'individual',
+                    'to' => $this->recipientNumber,
+                    'type' => 'interactive',
+                    'interactive' => [
+                        'type' => 'button',
+                        'header' => [
+                            'type' => 'image',
+                            'image' => [
+                                'link' => $link
+                            ]
+                        ],
+                        'body' => [
+                            'text' => $body
+                        ],
+                        'footer' => [
+                            'text' => $footer
+                        ],
+                        'action' => $sections
+                    ]
+                ];
+            } elseif (strtolower($type === 'document')) {
 
-            $data = [
-                'messaging_product' => 'whatsapp',
-                'recipient_type' => 'individual',
-                'to' => $this->recipientNumber,
-                'type' => 'interactive',
-                'interactive' => [
-                    'type' => 'button',
-                    'header' => [
-                        'type' => 'image',
-                        'image' => [
-                            'link' => 'https://via.placeholder.com/500x500.png'
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'recipient_type' => 'individual',
+                    'to' => $this->recipientNumber,
+                    'type' => 'interactive',
+                    'interactive' => [
+                            'type' => 'button',
+                            'header' => [
+                                'type' => 'document',
+                                'document' => [
+                                    'link' => $link
+                                ]
+                            ],
+                            'body' => [
+                                'text' => $body
+                            ],
+                            'footer' => [
+                                'text' => $footer
+                            ],
+                            'action' => $sections
                         ]
-                    ],
-                    'body' => [
-                        'text' => $body
-                    ],
-                    'footer' => [
-                        'text' => $footer
-                    ],
-                    'action' => $sections
-                ]
-            ];
-            
-            
+                ];
+
+            } elseif (strtolower($type === 'video')) {
+
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'recipient_type' => 'individual',
+                    'to' => $this->recipientNumber,
+                    'type' => 'interactive',
+                    'interactive' => [
+                        'type' => 'button',
+                        'header' => [
+                            'type' => 'video',
+                            'video' => [
+                                'link' => $link
+                            ]
+                        ],
+                        'body' => [
+                            'text' => $body
+                        ],
+                        'footer' => [
+                            'text' => $footer
+                        ],
+                        'action' => $sections
+                    ]
+                ];
+
+            }
+
+            else{
+                $data = [
+                    'messaging_product' => 'whatsapp',
+                    'recipient_type' => 'individual',
+                    'to' => $this->recipientNumber,
+                    'type' => 'interactive',
+                    'interactive' => [
+                        'type' => 'button',
+                        'header' => [
+                            'type' => 'text',
+                            'text' => $header
+                        ],
+                        'body' => [
+                            'text' => $body
+                        ],
+                        'footer' => [
+                            'text' => $footer
+                        ],
+                        'action' => $sections
+                    ]
+                ];  
+            }
+
+
+
+
+
+
+
             $client = new Client();
             $jsonData = json_encode($data);
             $response = $client->post($_ENV['BASE_URI'] . '/' . $this->version . '/' . $this->businessPhoneNumberId . '/messages', [
