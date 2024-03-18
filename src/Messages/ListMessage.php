@@ -22,7 +22,7 @@ class ListMessage
     }
 
 
-    public function list(string $header, string $body, string $footer = null, $sections, string $type, string $link = null)
+    public function list(string $header = null, string $body, string $footer = null, $sections, string $type, string $link = null)
     {
         try {
 
