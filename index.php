@@ -1,16 +1,17 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use Chandachewe\Whatsapp\Messages\TemplateMessage;
+use Chandachewe\Whatsapp\Messages\TextMessage;
 
 
-$templateMessage = new TemplateMessage( 'v19.0',
+$textMessage = new TextMessage(
+'v19.0',
 '103211462576623',
 '260769891754',
-'EAALG7oWrKU4BO65N3tTgzFoGxgMUY3O0whurJgIrH60ohm4zKsMkgeg7cgPR1HjQeXMkDOWUfInnG6inQcnE3AwAXzdkYrqs6RR76lsVv6T7XF7Vuqm2SuOm3fRDg9SUrFgBfxs2OTaSy22P87ZCwpjy0L1tg2BbbFYZAxijpsX8ZBob0R1lUrIwYzfyQUlyVCnmkQ90iO8DpWTuxIZD');
+'EAALG7oWrKU4BO5ofhqZACnNzMdsSyhvSWmVZA6mY1M7FlZAzso7egSlA1eEobdSHKVq1SaYY1fcH7cWvRkO7eawnGI9p2Dei1VLZCnQag4S4ZCwBO92hxSuECOzFE5tNrncHsEXppY1PkDaQjj7H6igdgRFcehSAo2upQlfoYlPSundltPu5Y2HYk5xDKTCWfrRgNfZBhlle0SfvM7Tt0ZD');
 
-$response = $templateMessage->template(   
-    'hello_world'
+$response = $textMessage->text(   
+    'Good morning'
    
 );
 
