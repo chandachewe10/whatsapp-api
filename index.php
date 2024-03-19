@@ -27,8 +27,8 @@ $response = $buttonMessage->button(
            
         ]
     ],
-    'text',
-    ''
+    'image',
+    'https://via.placeholder.com/300'
 
 );
 

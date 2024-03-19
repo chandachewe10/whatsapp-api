@@ -168,7 +168,49 @@ echo $response;
 
 
 ```
+> Sometimes you may want to include the image in the header with button option(s) below the image. You can achieve this by using `image` instead of `text` and providing the image `link`. Hence your code will now be:
 
+```php
+<?php
+require_once 'vendor/autoload.php';
+
+use Chandachewe\Whatsapp\Messages\ButtonMessage;
+
+
+$buttonMessage = new ButtonMessage(
+'v19.0',
+'BUSINESS PHONE NUMBER ID',
+'RECIPIENT PHONE NUMBER',
+'TOKEN'
+);
+
+$response = $buttonMessage->button(
+    'Header',
+    'Body Message',
+    'Footer (Optional)',
+    [
+        'buttons' => [
+            [
+                'type' => 'reply',
+                'reply' => [
+                    'id' => 'unique-postback-id',
+                    'title' => 'your button title'
+                ]
+            ],
+           
+            // You can add another type and reply here 
+                 ...
+        ]
+    ],
+    'image', // note that we have replaced text with image  
+    'https://path_to_your_image_link' // note that we have added the image link 
+
+);
+
+echo $response;
+
+
+```
 
 
 
