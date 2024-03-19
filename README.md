@@ -213,7 +213,7 @@ echo $response;
 ```
 
 
-> Sometimes you may want to include the document in the header with button option(s) below the document. You can achieve this by using `document` instead of `image` and providing the document `link`. Hence your code will now be:
+> Sometimes you may want to include the document in the header with button option(s) below the document. You can achieve this by using `document` instead of `text` and providing the document `link`. Hence your code will now be:
 
 ```php
 <?php
@@ -247,7 +247,7 @@ $response = $buttonMessage->button(
                  ...
         ]
     ],
-    'document', // note that we have replaced image with document  
+    'document', // note that we have replaced text with document  
     'https://path_to_your_document' // note that we have added the document link 
 
 );
@@ -255,6 +255,48 @@ $response = $buttonMessage->button(
 echo $response;
 
 
+```
+
+> Sometimes you may want to show a small video clip in the header with button option(s) below the video. You can achieve this by using `video` instead of `text` and providing the video `link`. Hence your code will now be:
+
+```php
+<?php
+require_once 'vendor/autoload.php';
+
+use Chandachewe\Whatsapp\Messages\ButtonMessage;
+
+
+$buttonMessage = new ButtonMessage(
+'v19.0',
+'BUSINESS PHONE NUMBER ID',
+'RECIPIENT PHONE NUMBER',
+'TOKEN'
+);
+
+$response = $buttonMessage->button(
+    'Header',
+    'Body Message',
+    'Footer (Optional)',
+    [
+        'buttons' => [
+            [
+                'type' => 'reply',
+                'reply' => [
+                    'id' => 'unique-postback-id',
+                    'title' => 'your button title'
+                ]
+            ],
+           
+            // You can add another type and reply here 
+                 ...
+        ]
+    ],
+    'video', // note that we have replaced text with video  
+    'https://path_to_your_video' // note that we have added the video link 
+
+);
+
+echo $response;
 ```
 
 

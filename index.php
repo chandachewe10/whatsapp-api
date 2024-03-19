@@ -27,8 +27,8 @@ $response = $buttonMessage->button(
            
         ]
     ],
-    'document',
-    'https://www.pdf995.com/samples/pdf.pdf'
+    'video',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
 
 );
 
