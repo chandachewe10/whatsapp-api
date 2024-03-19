@@ -74,4 +74,58 @@ echo $response;
 ```
 
 
+### Send a List Message 
+Messages including a menu of up to 10 options. This type of message offers a simpler and more consistent way for users to make a selection when interacting with a business.
+
+```php
+<?php
+require_once 'vendor/autoload.php';
+
+use Chandachewe\Whatsapp\Messages\ListMessage;
+
+
+$listMessage = new ListMessage(
+'v19.0',
+'BUSINESS PHONE NUMBER ID',
+'RECIPIENT PHONE NUMBER',
+'TOKEN'
+);
+
+$response = $listMessage->list(   
+    'Header',
+    'Body Message',
+    'Footer (Optional)',
+    [
+        'button' => 'title on drop down button',
+        'sections' => [
+            [
+                'title' => 'first row title',
+                'rows' => [
+                    [
+                        'id' => '100993900202',
+                        'title' => 'Your heading',
+                        'description' => 'Your decsription'
+                    ]
+                ],
+               
+                // You can add another title and row here 
+                 ...
+                
+            ]
+        ]
+                    ],
+                 'text',
+                 ''   
+  
+);
+
+echo $response;
+
+```
+
+
+
+
+
+
 
