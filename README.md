@@ -66,7 +66,7 @@ $textMessage = new TextMessage(
 );
 
 $response = $textMessage->text(   
-    'You have to check out this amazing messaging service https://www.whatsapp.com/'
+    'You have to check out this amazing messaging package at https://github.com/chandachewe10/whatsapp-api'
    
 );
 
