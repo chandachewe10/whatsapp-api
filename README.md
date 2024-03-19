@@ -104,7 +104,7 @@ $response = $listMessage->list(
                     [
                         'id' => '100993900202',
                         'title' => 'Your heading',
-                        'description' => 'Your decsription'
+                        'description' => 'Your description'
                     ]
                 ],
                
