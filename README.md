@@ -202,7 +202,7 @@ $response = $buttonMessage->button(
                  ...
         ]
     ],
-    'document', // note that we have replaced text with image  
+    'image', // note that we have replaced text with image  
     'https://path_to_your_image' // note that we have added the image link 
 
 );
