@@ -300,6 +300,41 @@ echo $response;
 ```
 
 
+### Send a Location Message 
+These Messages allows you to send your location address to your clients/customers. 
+
+```php
+<?php
+require_once 'vendor/autoload.php';
+
+use Chandachewe\Whatsapp\Messages\LocationMessage;
+
+
+$locationMessage = new LocationMessage(
+'v19.0',
+'BUSINESS PHONE NUMBER ID',
+'RECIPIENT PHONE NUMBER',
+'TOKEN'
+);
+
+$response = $locationMessage->location(
+    'Longitude',
+    'Latitude',
+    'Name of location ',
+    'Address',
+    'Body',
+    'optional footer',
+   [
+        "name" => "send_location" 
+   ]
+
+);
+
+echo $response;
+
+
+```
+
 
 
 
