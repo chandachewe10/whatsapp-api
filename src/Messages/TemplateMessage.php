@@ -1,4 +1,5 @@
 <?php
+
 namespace Chandachewe\Whatsapp\Messages;
 
 require '.../../vendor/autoload.php';
@@ -14,47 +15,43 @@ class TemplateMessage
     private $token;
 
     public function __construct(string $version, $businessPhoneNumberId, $recipientNumber, string $token)
-{
-    $this->version = $version;
-    $this->businessPhoneNumberId = sprintf("%.0f", $businessPhoneNumberId);
-    $this->recipientNumber = sprintf("%.0f", $recipientNumber); 
-    $this->token = $token;
-}
-
+    {
+        $this->version = $version;
+        $this->businessPhoneNumberId = sprintf('%.0f', $businessPhoneNumberId);
+        $this->recipientNumber = sprintf('%.0f', $recipientNumber);
+        $this->token = $token;
+    }
 
     public function template(string $templateName, string $languageCode = null)
     {
         try {
-          
-
             $data = [
                 'messaging_product' => 'whatsapp',
-                'to' => $this->recipientNumber,
-                'type' => 'template',
-                'template' => [
-                    'name' => $templateName,
+                'to'                => $this->recipientNumber,
+                'type'              => 'template',
+                'template'          => [
+                    'name'     => $templateName,
                     'language' => [
-                        'code' => $languageCode ?? 'en_US'
+                        'code' => $languageCode ?? 'en_US',
                     ],
-                    
-                ]
+
+                ],
             ];
 
             $client = new Client();
             $jsonData = json_encode($data);
             $response = $client->post($_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages', [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $this->token,
-                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer '.$this->token,
+                    'Content-Type'  => 'application/json',
 
                 ],
-                'body' => $jsonData
+                'body' => $jsonData,
             ]);
 
-
             $responseBody = $response->getBody();
-            return $responseBody;
 
+            return $responseBody;
         } catch (\Exception $e) {
             return $e->getMessage();
         }
