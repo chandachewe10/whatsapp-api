@@ -124,6 +124,53 @@ echo $response;
 
 
 
+### Send a Button option Message 
+These are Messages including up to 3 options —each option is a button. This type of message offers a quicker way for users to make a selection from a menu when interacting with a business.
+
+```php
+<?php
+require_once 'vendor/autoload.php';
+
+use Chandachewe\Whatsapp\Messages\ButtonMessage;
+
+
+$buttonMessage = new ButtonMessage(
+'v19.0',
+'BUSINESS PHONE NUMBER ID',
+'RECIPIENT PHONE NUMBER',
+'TOKEN'
+);
+
+$response = $buttonMessage->button(
+    'Header',
+    'Body Message',
+    'Footer (Optional)',
+    [
+        'buttons' => [
+            [
+                'type' => 'reply',
+                'reply' => [
+                    'id' => 'unique-postback-id',
+                    'title' => 'your button title'
+                ]
+            ],
+           
+            // You can add another type and reply here 
+                 ...
+        ]
+    ],
+    'text',
+    ''
+
+);
+
+echo $response;
+
+
+```
+
+
+
 
 
 
