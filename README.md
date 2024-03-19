@@ -49,7 +49,7 @@ echo $response;
 
 
 ### Send a Text Message 
-You can only send a template type message as your first message to a user. If you want to send a text message the user must first send a message to you or reply to any of the message you sent.
+You can only send a template type message as your first message to a user. If you want to send a text message the user must first send a message to you or reply to any of the messages you sent.
 
 ```php
 <?php
@@ -75,7 +75,7 @@ echo $response;
 
 
 ### Send a List Message 
-Messages including a menu of up to 10 options. This type of message offers a simpler and more consistent way for users to make a selection when interacting with a business.
+These are Messages including a menu of up to 10 options. This type of message offers a simpler and more consistent way for users to make a selection when interacting with a business.
 
 ```php
 <?php
@@ -202,8 +202,8 @@ $response = $buttonMessage->button(
                  ...
         ]
     ],
-    'image', // note that we have replaced text with image  
-    'https://path_to_your_image_link' // note that we have added the image link 
+    'document', // note that we have replaced text with image  
+    'https://path_to_your_image' // note that we have added the image link 
 
 );
 
@@ -211,6 +211,52 @@ echo $response;
 
 
 ```
+
+
+> Sometimes you may want to include the document in the header with button option(s) below the document. You can achieve this by using `document` instead of `image` and providing the document `link`. Hence your code will now be:
+
+```php
+<?php
+require_once 'vendor/autoload.php';
+
+use Chandachewe\Whatsapp\Messages\ButtonMessage;
+
+
+$buttonMessage = new ButtonMessage(
+'v19.0',
+'BUSINESS PHONE NUMBER ID',
+'RECIPIENT PHONE NUMBER',
+'TOKEN'
+);
+
+$response = $buttonMessage->button(
+    'Header',
+    'Body Message',
+    'Footer (Optional)',
+    [
+        'buttons' => [
+            [
+                'type' => 'reply',
+                'reply' => [
+                    'id' => 'unique-postback-id',
+                    'title' => 'your button title'
+                ]
+            ],
+           
+            // You can add another type and reply here 
+                 ...
+        ]
+    ],
+    'document', // note that we have replaced image with document  
+    'https://path_to_your_document' // note that we have added the document link 
+
+);
+
+echo $response;
+
+
+```
+
 
 
 

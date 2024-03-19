@@ -27,8 +27,8 @@ $response = $buttonMessage->button(
            
         ]
     ],
-    'image',
-    'https://via.placeholder.com/300'
+    'document',
+    'https://www.pdf995.com/samples/pdf.pdf'
 
 );
 
