@@ -1,4 +1,5 @@
 <?php
+
 namespace Chandachewe\Whatsapp\Messages;
 
 require '.../../vendor/autoload.php';
@@ -16,52 +17,48 @@ class ListMessage
     public function __construct(string $version, $businessPhoneNumberId, $recipientNumber, string $token)
     {
         $this->version = $version;
-        $this->businessPhoneNumberId = sprintf("%.0f", $businessPhoneNumberId);
-        $this->recipientNumber = sprintf("%.0f", $recipientNumber);
+        $this->businessPhoneNumberId = sprintf('%.0f', $businessPhoneNumberId);
+        $this->recipientNumber = sprintf('%.0f', $recipientNumber);
         $this->token = $token;
     }
-
 
     public function list(string $header = null, string $body, string $footer = null, $sections)
     {
         try {
-
-
             $data = [
                 'messaging_product' => 'whatsapp',
-                'recipient_type' => 'individual',
-                'to' => $this->recipientNumber,
-                'type' => 'interactive',
-                'interactive' => [
-                    'type' => 'list',
+                'recipient_type'    => 'individual',
+                'to'                => $this->recipientNumber,
+                'type'              => 'interactive',
+                'interactive'       => [
+                    'type'   => 'list',
                     'header' => [
                         'type' => 'text',
-                        'text' => $header
+                        'text' => $header,
                     ],
                     'body' => [
-                        'text' => $body
+                        'text' => $body,
                     ],
                     'footer' => [
-                        'text' => $footer
+                        'text' => $footer,
                     ],
-                    'action' => $sections
-                ]
+                    'action' => $sections,
+                ],
             ];
             $client = new Client();
             $jsonData = json_encode($data);
-            $response = $client->post($_ENV['BASE_URI'] . '/' . $this->version . '/' . $this->businessPhoneNumberId . '/messages', [
+            $response = $client->post($_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages', [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $this->token,
-                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer '.$this->token,
+                    'Content-Type'  => 'application/json',
 
                 ],
-                'body' => $jsonData
+                'body' => $jsonData,
             ]);
 
-
             $responseBody = $response->getBody();
-            return $responseBody;
 
+            return $responseBody;
         } catch (\Exception $e) {
             return $e->getMessage();
         }
