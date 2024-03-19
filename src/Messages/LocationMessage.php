@@ -1,4 +1,5 @@
 <?php
+
 namespace Chandachewe\Whatsapp\Messages;
 
 require '.../../vendor/autoload.php';
@@ -16,54 +17,49 @@ class LocationMessage
     public function __construct(string $version, $businessPhoneNumberId, $recipientNumber, string $token)
     {
         $this->version = $version;
-        $this->businessPhoneNumberId = sprintf("%.0f", $businessPhoneNumberId);
-        $this->recipientNumber = sprintf("%.0f", $recipientNumber);
+        $this->businessPhoneNumberId = sprintf('%.0f', $businessPhoneNumberId);
+        $this->recipientNumber = sprintf('%.0f', $recipientNumber);
         $this->token = $token;
     }
 
-
-    public function location(string $longitude,string $latitude, string $nameOfLocation, string $address, string $body, string $footer = null,$sections)
+    public function location(string $longitude, string $latitude, string $nameOfLocation, string $address, string $body, string $footer = null, $sections)
     {
         try {
-
-
             $data = [
                 'messaging_product' => 'whatsapp',
-                'recipient_type' => 'individual',
-                'to' => $this->recipientNumber,
-                'type' => 'LOCATION',
-                'location' => [
+                'recipient_type'    => 'individual',
+                'to'                => $this->recipientNumber,
+                'type'              => 'LOCATION',
+                'location'          => [
                     'longitude' => $longitude,
-                    'latitude' => $latitude,
-                    'name' => $nameOfLocation,
-                    'address' => $address
+                    'latitude'  => $latitude,
+                    'name'      => $nameOfLocation,
+                    'address'   => $address,
                 ],
                 'body' => [
                     'type' => 'text',
-                    'text' => $body
+                    'text' => $body,
                 ],
                 'footer' => [
-                    'text' => $footer
+                    'text' => $footer,
                 ],
-                'action' => $sections
+                'action' => $sections,
             ];
-            
-            
+
             $client = new Client();
             $jsonData = json_encode($data);
-            $response = $client->post($_ENV['BASE_URI'] . '/' . $this->version . '/' . $this->businessPhoneNumberId . '/messages', [
+            $response = $client->post($_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages', [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $this->token,
-                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer '.$this->token,
+                    'Content-Type'  => 'application/json',
 
                 ],
-                'body' => $jsonData
+                'body' => $jsonData,
             ]);
 
-
             $responseBody = $response->getBody();
-            return $responseBody;
 
+            return $responseBody;
         } catch (\Exception $e) {
             return $e->getMessage();
         }

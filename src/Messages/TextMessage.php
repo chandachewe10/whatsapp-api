@@ -1,4 +1,5 @@
 <?php
+
 namespace Chandachewe\Whatsapp\Messages;
 
 require '.../../vendor/autoload.php';
@@ -14,45 +15,41 @@ class TextMessage
     private $token;
 
     public function __construct(string $version, $businessPhoneNumberId, $recipientNumber, string $token)
-{
-    $this->version = $version;
-    $this->businessPhoneNumberId = sprintf("%.0f", $businessPhoneNumberId);
-    $this->recipientNumber = sprintf("%.0f", $recipientNumber); 
-    $this->token = $token;
-}
-
+    {
+        $this->version = $version;
+        $this->businessPhoneNumberId = sprintf('%.0f', $businessPhoneNumberId);
+        $this->recipientNumber = sprintf('%.0f', $recipientNumber);
+        $this->token = $token;
+    }
 
     public function text(string $message)
     {
         try {
-          
-
             $data = [
                 'messaging_product' => 'whatsapp',
-                'recipient_type' => 'individual',
-                'to' => $this->recipientNumber,
-                'type' => 'text',
-                'text' => [
+                'recipient_type'    => 'individual',
+                'to'                => $this->recipientNumber,
+                'type'              => 'text',
+                'text'              => [
                     'preview_url' => 'true',
-                    'body' => $message
-                ]
+                    'body'        => $message,
+                ],
             ];
 
             $client = new Client();
             $jsonData = json_encode($data);
             $response = $client->post($_ENV['BASE_URI'].'/'.$this->version.'/'.$this->businessPhoneNumberId.'/messages', [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $this->token,
-                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer '.$this->token,
+                    'Content-Type'  => 'application/json',
 
                 ],
-                'body' => $jsonData
+                'body' => $jsonData,
             ]);
 
-
             $responseBody = $response->getBody();
-            return $responseBody;
 
+            return $responseBody;
         } catch (\Exception $e) {
             return $e->getMessage();
         }
