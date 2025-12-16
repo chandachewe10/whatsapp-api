@@ -21,7 +21,7 @@ class ListMessage
         $this->token = $token;
     }
 
-    public function list(string $header = null, string $body, string $footer = null, $sections)
+    public function list(?string $header = null, string $body, ?string $footer = null, $sections)
     {
         try {
             $data = [

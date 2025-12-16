@@ -21,7 +21,7 @@ class TemplateMessage
         $this->token = $token;
     }
 
-    public function template(string $templateName, string $languageCode = null)
+    public function template(string $templateName, ?string $languageCode = null)
     {
         try {
             $data = [
