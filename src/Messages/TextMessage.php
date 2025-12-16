@@ -2,9 +2,8 @@
 
 namespace Chandachewe\Whatsapp\Messages;
 
-require '.../../vendor/autoload.php';
-$dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
-$dotenv->load();
+// Autoloader is handled by Composer when used as a package
+// For standalone usage, ensure vendor/autoload.php is loaded before using this class
 use GuzzleHttp\Client;
 
 class TextMessage
