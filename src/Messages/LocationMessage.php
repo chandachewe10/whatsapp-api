@@ -21,7 +21,7 @@ class LocationMessage
         $this->token = $token;
     }
 
-    public function location(string $longitude, string $latitude, string $nameOfLocation, string $address, string $body, string $footer = null, $sections)
+    public function location(string $longitude, string $latitude, string $nameOfLocation, string $address, string $body, ?string $footer = null, $sections)
     {
         try {
             $data = [
